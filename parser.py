@@ -125,13 +125,17 @@ def validate(obj, schema):
     if str(obj['version']) != str(ds.get('version', '1')):
         errors.append('版本不匹配: 编码 %s，表 %s' % (obj['version'], ds.get('version')))
     defs = ds.get('slots', {})
+    optional = set(ds.get('optional', []))
     # 未知槽位检查
     for k in obj['slots']:
         if k not in defs:
             errors.append('未知槽位: %s' % k)
     # 必填槽位 + 取值校验
+    # optional 槽位允许缺失；其余槽位缺失报错（编码要求槽位完整，spec §9）
     for k, d in defs.items():
         if k not in obj['slots']:
+            if k in optional:
+                continue
             errors.append('缺少槽位: %s' % k)
             continue
         v = obj['slots'][k]

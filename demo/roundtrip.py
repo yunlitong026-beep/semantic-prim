@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-"""往返零漂移 Demo：编码 -> 人话 -> 编码，确定性还原。仅演示，不依赖外部模型。"""
+"""编码结构稳定性 Demo：编码 -> 人话 -> 编码，确定性还原。仅演示，不依赖外部模型。
+
+说明：这里验证的是「编码结构互转稳定」，不是「人话 -> 编码」的完整双向翻译。
+人话 -> 编码的正向解析见 text2code.py，真往返比对见 tests/crosscheck.py。
+"""
 import os
 import sys
 
@@ -37,7 +41,16 @@ def render(obj):
     else:
         action = '%s%s至%s' % (Q_MAP[s['Q']], CAM_MAP[s['CAM']], size)
     lit = '、'.join(LIT_MAP[x] for x in s['LIT'])
-    return '%s，%s在%s，%s，%s，%s，%s' % (t, subject, p, action, lit, s['DUR'], SEQ_MAP[s['SEQ']])
+    base = '%s，%s在%s，%s，%s，%s，%s' % (t, subject, p, action, lit, s['DUR'], SEQ_MAP[s['SEQ']])
+    # 武器槽位（可选，缺省=无武器，不渲染）
+    extra = []
+    if s.get('weapon.holder') == 'null' and s.get('motion') == 'fly-guided':
+        extra.append('御剑：剑离体、真气丝牵引、意念操控飞行')
+    elif s.get('weapon') == 'sword':
+        extra.append('持剑')
+    if extra:
+        base += '（' + '；'.join(extra) + '）'
+    return base
 
 
 ENCODINGS = [
@@ -51,12 +64,14 @@ ENCODINGS = [
     'film.shot@1 { T:T04, P:P04, ID:I04, CAM:C9, SIZE:S3, Q:急, LIT:[L7], DUR:2s, SEQ:平行 }',
     'film.shot@1 { T:T01, P:P02, ID:I01, CAM:C7, SIZE:S1, Q:常速, LIT:[L1], DUR:4s, SEQ:闪前 }',
     'film.shot@1 { T:T02, P:P04, ID:I02[红], CAM:C0, SIZE:S4, Q:停, LIT:[L5], DUR:1s, SEQ:独立 }',
+    # 招牌案例：御剑离剑式（weapon 槽位闭环）
+    'film.shot@1 { T:T02, P:P04, ID:I02, CAM:C5, SIZE:S2, Q:慢, LIT:[L0,L8], DUR:6s, SEQ:独立, weapon:sword, weapon.holder:null, weapon.drive:qi-thread, motion:fly-guided }',
 ]
 
 
 def main():
     schema = parser.load_schema()
-    print('往返零漂移演示（编码 -> 人话 -> 编码）\n')
+    print('编码结构稳定性演示（编码 -> 人话 -> 编码）\n')
     ok = 0
     for i, enc in enumerate(ENCODINGS, 1):
         obj = parser.parse(enc)
@@ -75,7 +90,7 @@ def main():
         print('    %s' % enc)
         print('    -> %s  [%s]' % (text2, mark))
         print()
-    print('%d/%d 条全部确定性还原，零漂移。' % (ok, len(ENCODINGS)))
+    print('%d/%d 条全部确定性还原（编码结构稳定）。' % (ok, len(ENCODINGS)))
 
 
 if __name__ == '__main__':

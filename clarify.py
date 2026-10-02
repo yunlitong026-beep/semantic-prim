@@ -18,7 +18,7 @@ import sys
 ACCEPT = 0.7
 
 # 歧义词表：词 -> [(候选中文, 示例原语码, 可选槽位dict), ...]
-# 码是「外层动作消歧」的示意命名空间，未并入 film.shot 相机 schema。
+# weapon.* / motion 消歧槽位已并入 film.shot 可选槽位（schema.json optional）。
 AMBIG = {
     "拥抱": [
         ("普通正面拥抱", "act.hug.front"),
@@ -55,9 +55,11 @@ AMBIG = {
     ],
 }
 
-# 命中守卫：避免把复合词误拆成歧义词（例：不要从「看见」里误报「看」）。
+# 命中守卫：避免把复合词误拆成歧义词。
+# 例：不要从「看见」里误报「看」；不要把镜头运动「拉至远景」误报成手部动作「拉」。
 GUARD = {
     "看": {"not_followed_by": "见到"},
+    "拉": {"not_followed_by": "至"},
 }
 
 
