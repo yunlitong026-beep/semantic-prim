@@ -1,0 +1,28 @@
+{
+  "domains": {
+    "film.shot": {
+      "version": "1",
+      "required": ["ID", "DUR"],
+      "defaults": {
+        "T": "T00",
+        "P": "P00",
+        "CAM": "C0",
+        "SIZE": "S00",
+        "Q": "常速",
+        "LIT": ["L0"],
+        "SEQ": "独立"
+      },
+      "slots": {
+        "T":    { "type": "enum",     "label": "时刻",   "values": ["T00", "T01", "T02", "T03", "T04"] },
+        "P":    { "type": "enum",     "label": "场景",   "values": ["P00", "P01", "P02", "P03", "P04"] },
+        "ID":   { "type": "entity",   "label": "主体" },
+        "CAM":  { "type": "enum",     "label": "镜头运动", "values": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9"] },
+        "SIZE": { "type": "enum",     "label": "景别",   "values": ["S00", "S0", "S1", "S2", "S3", "S4", "S5"] },
+        "Q":    { "type": "enum",     "label": "速度强度", "values": ["停", "慢", "常速", "快", "急"] },
+        "LIT":  { "type": "list",     "label": "光影",   "values": ["L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9"] },
+        "DUR":  { "type": "quantity", "label": "时长" },
+        "SEQ":  { "type": "enum",     "label": "时序",   "values": ["独立", "接续", "平行", "闪回", "闪前"] }
+      }
+    }
+  }
+}

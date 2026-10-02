@@ -1,0 +1,14 @@
+{
+  "samples": [
+    {"id": 1, "text": "清晨，老人在荒野，缓慢推至全景，侧光，5秒，独立镜头", "ref": "film.shot@1 { T:T01, P:P04, ID:I04, CAM:C1, SIZE:S1, Q:慢, LIT:[L2], DUR:5s, SEQ:独立 }"},
+    {"id": 2, "text": "黄昏，黑衣女子在街市，快速跟至近景，逆光，3秒，接上一镜", "ref": "film.shot@1 { T:T02, P:P02, ID:I01[黑], CAM:C5, SIZE:S3, Q:快, LIT:[L3], DUR:3s, SEQ:接续 }"},
+    {"id": 3, "text": "正午，孩童在室内，常速摇至中景，柔光，4秒，与上一镜平行", "ref": "film.shot@1 { T:T03, P:P03, ID:I03, CAM:C3, SIZE:S2, Q:常速, LIT:[L6], DUR:4s, SEQ:平行 }"},
+    {"id": 4, "text": "夜，男子在荒野，快速环绕至大特写，暗调，2秒，闪回", "ref": "film.shot@1 { T:T04, P:P04, ID:I02, CAM:C8, SIZE:S5, Q:快, LIT:[L9], DUR:2s, SEQ:闪回 }"},
+    {"id": 5, "text": "清晨，白衣女子在古寺长廊，缓慢升至远景，自然光、丁达尔，6秒，独立镜头", "ref": "film.shot@1 { T:T01, P:P01, ID:I01[白], CAM:C6, SIZE:S0, Q:慢, LIT:[L0,L8], DUR:6s, SEQ:独立 }"},
+    {"id": 6, "text": "黄昏，老人固定机位特写，底光，1秒，接上一镜", "ref": "film.shot@1 { T:T02, P:P00, ID:I04, CAM:C0, SIZE:S4, Q:停, LIT:[L5], DUR:1s, SEQ:接续 }"},
+    {"id": 7, "text": "正午，男子在街市，急促手持至近景，硬光，3秒，与上一镜平行", "ref": "film.shot@1 { T:T03, P:P02, ID:I02, CAM:C9, SIZE:S3, Q:急, LIT:[L7], DUR:3s, SEQ:平行 }"},
+    {"id": 8, "text": "夜，红衣孩童在室内，常速移至全景，顺光，4秒，闪前", "ref": "film.shot@1 { T:T04, P:P03, ID:I03[红], CAM:C4, SIZE:S1, Q:常速, LIT:[L1], DUR:4s, SEQ:闪前 }"},
+    {"id": 9, "text": "清晨，女子在荒野，缓慢降至中景，顶光，5秒，接上一镜", "ref": "film.shot@1 { T:T01, P:P04, ID:I01, CAM:C7, SIZE:S2, Q:慢, LIT:[L4], DUR:5s, SEQ:接续 }"},
+    {"id": 10, "text": "黄昏，孩童在古寺长廊，缓慢拉至远景，侧光、柔光，3秒，独立镜头", "ref": "film.shot@1 { T:T02, P:P01, ID:I03, CAM:C2, SIZE:S0, Q:慢, LIT:[L2,L6], DUR:3s, SEQ:独立 }"}
+  ]
+}
