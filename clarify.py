@@ -21,25 +21,25 @@ ACCEPT = 0.7
 # weapon.* / motion 消歧槽位已并入 film.shot 可选槽位（schema.json optional）。
 AMBIG = {
     "拥抱": [
-        ("普通正面拥抱", "act.hug.front"),
-        ("公主抱", "act.hug.carry"),
-        ("从背后环抱", "act.hug.back"),
-        ("侧身拥抱", "act.hug.side"),
+        ("普通正面拥抱", "act.hug.front", {"act": "hug.front"}),
+        ("公主抱", "act.hug.carry", {"act": "hug.carry"}),
+        ("从背后环抱", "act.hug.back", {"act": "hug.back"}),
+        ("侧身拥抱", "act.hug.side", {"act": "hug.side"}),
     ],
     "拉": [
-        ("拉手", "act.hold.hand"),
-        ("拉入怀中", "act.pull.embrace"),
-        ("拽住对方", "act.grab"),
+        ("拉手", "act.hold.hand", {"act": "hold.hand"}),
+        ("拉入怀中", "act.pull.embrace", {"act": "pull.embrace"}),
+        ("拽住对方", "act.grab", {"act": "grab"}),
     ],
     "拍": [
-        ("拍肩", "act.pat.shoulder"),
-        ("拍头", "act.pat.head"),
-        ("拍背", "act.pat.back"),
+        ("拍肩", "act.pat.shoulder", {"act": "pat.shoulder"}),
+        ("拍头", "act.pat.head", {"act": "pat.head"}),
+        ("拍背", "act.pat.back", {"act": "pat.back"}),
     ],
     "看": [
-        ("对视", "act.look.eye"),
-        ("凝视", "act.look.gaze"),
-        ("瞥一眼", "act.look.glance"),
+        ("对视", "act.look.eye", {"act": "look.eye"}),
+        ("凝视", "act.look.gaze", {"act": "look.gaze"}),
+        ("瞥一眼", "act.look.glance", {"act": "look.glance"}),
     ],
     "御剑": [
         ("手持剑柄挥剑", "weapon.mode.hand",

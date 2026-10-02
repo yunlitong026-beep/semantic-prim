@@ -74,6 +74,43 @@ def weapon_closed_loop(schema):
     print('闭环:', 'OK（御剑离体约束已进入渲染编码）' if ok else 'FAIL')
 
 
+def act_closed_loop(schema):
+    print('\n拥抱消歧落地（act 槽位 -> film.shot 编码，校验通过即闭环）\n')
+    text = '黄昏，街市，男子上前拥抱女子，2秒'
+    res = text2code.text2code(text, picks={'拥抱': 0}, overrides={'ID': 'I02'})
+    obj = res['obj']
+    errs = parser.validate(obj, schema)
+    act = obj['slots'].get('act')
+    ok = (not errs) and act == 'hug.front'
+    print(res['encoding'])
+    print('act =', act)
+    print('校验:', '通过' if not errs else errs)
+    print('闭环:', 'OK（动作消歧结果已进入渲染编码）' if ok else 'FAIL')
+
+
+def true_roundtrip(samples):
+    """真往返：人话 -> 编码 -> 人话2 -> 编码2，验证全链路闭合（非仅编码互转）。"""
+    print('\n真往返（人话 -> 编码 -> 人话2 -> 编码2，全链路稳定）\n')
+    ok = 0
+    for s in samples:
+        res = text2code.text2code(s['text'])
+        if res['needs_clarify']:
+            print('[%d] 需要回询 %s，跳过' % (s['id'], [x['word'] for x in res['needs_clarify']]))
+            continue
+        if res['missing']:
+            print('[%d] 缺必填 %s，跳过' % (s['id'], res['missing']))
+            continue
+        enc = res['encoding']
+        text2 = rt.render(res['obj'])
+        enc2 = parser.dump(parser.parse(enc))
+        stable = (enc2 == enc)
+        if stable:
+            ok += 1
+        print('[%d] %s' % (s['id'], text2))
+        print('    %s -> %s  [%s]' % (enc, enc2, 'OK' if stable else 'FAIL'))
+    print('\n%d/%d 真往返稳定' % (ok, len(samples)))
+
+
 def compare(candidates, samples):
     print('\n正向比对（候选编码 vs 参考编码）\n')
     agree = 0
@@ -109,6 +146,8 @@ if __name__ == '__main__':
     reverse_check(samples, schema)
     forward_check(samples)
     weapon_closed_loop(schema)
+    act_closed_loop(schema)
+    true_roundtrip(samples)
     if len(sys.argv) > 1:
         with open(sys.argv[1], encoding='utf-8') as f:
             candidates = json.load(f)

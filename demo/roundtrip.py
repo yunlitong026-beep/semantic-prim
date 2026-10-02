@@ -21,6 +21,10 @@ LIT_MAP = {'L0': '自然光', 'L1': '顺光', 'L2': '侧光', 'L3': '逆光', 'L
            'L5': '底光', 'L6': '柔光', 'L7': '硬光', 'L8': '丁达尔', 'L9': '暗调'}
 Q_MAP = {'停': '静止', '慢': '缓慢', '常速': '常速', '快': '快速', '急': '急促'}
 SEQ_MAP = {'独立': '独立镜头', '接续': '接上一镜', '平行': '与上一镜平行', '闪回': '闪回', '闪前': '闪前'}
+ACT_MAP = {'hug.front': '正面拥抱', 'hug.carry': '公主抱', 'hug.back': '背后环抱', 'hug.side': '侧身拥抱',
+           'hold.hand': '拉手', 'pull.embrace': '拉入怀中', 'grab': '拽住对方',
+           'pat.shoulder': '拍肩', 'pat.head': '拍头', 'pat.back': '拍背',
+           'look.eye': '对视', 'look.gaze': '凝视', 'look.glance': '瞥一眼'}
 
 
 def render(obj):
@@ -48,6 +52,9 @@ def render(obj):
         extra.append('御剑：剑离体、真气丝牵引、意念操控飞行')
     elif s.get('weapon') == 'sword':
         extra.append('持剑')
+    act = s.get('act')
+    if act:
+        extra.append('动作：%s' % ACT_MAP.get(act, act))
     if extra:
         base += '（' + '；'.join(extra) + '）'
     return base

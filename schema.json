@@ -3,7 +3,7 @@
     "film.shot": {
       "version": "1",
       "required": ["ID", "DUR"],
-      "optional": ["weapon", "weapon.holder", "weapon.drive", "motion"],
+      "optional": ["weapon", "weapon.holder", "weapon.drive", "motion", "act"],
       "defaults": {
         "T": "T00",
         "P": "P00",
@@ -26,7 +26,8 @@
         "weapon":        { "type": "enum", "label": "武器",     "values": ["sword"] },
         "weapon.holder": { "type": "enum", "label": "持握方式", "values": ["hand", "null"] },
         "weapon.drive":  { "type": "enum", "label": "驱动方式", "values": ["arm", "qi-thread"] },
-        "motion":        { "type": "enum", "label": "动作模式", "values": ["hand-swing", "fly-guided"] }
+        "motion":        { "type": "enum", "label": "动作模式", "values": ["hand-swing", "fly-guided"] },
+        "act":           { "type": "enum", "label": "人物动作", "values": ["hug.front", "hug.carry", "hug.back", "hug.side", "hold.hand", "pull.embrace", "grab", "pat.shoulder", "pat.head", "pat.back", "look.eye", "look.gaze", "look.glance"] }
       }
     }
   }

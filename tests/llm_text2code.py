@@ -245,9 +245,10 @@ def _self_test():
         }, ensure_ascii=False)
     r2 = llm_text2code('黄昏，街市，男子上前拥抱女子，2秒', client=mock_act, picks={'拥抱': 0})
     print('\n拥抱例编码:', r2['encoding'])
-    print('act 是否进编码:', 'act' in r2['obj']['slots'] or any(
-        k.startswith('act') for k in r2['obj']['slots']))
-    print('（预期 False：act.* 尚未并入 schema，属 Route B 待修）')
+    act_in = 'act' in r2['obj']['slots']
+    print('act 是否进编码:', act_in)
+    assert act_in, 'act.* 闭环应已生效'
+    print('（act.* 闭环已生效：动作消歧结果进入编码）')
     print('\n离线自测通过。')
 
 

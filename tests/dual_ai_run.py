@@ -127,7 +127,7 @@ def main():
         print('3) 歧义漏检（clarify 词表未覆盖）：')
         for i, w in miss_amb:
             print('   案例 %d 漏检 %s' % (i, '/'.join(w)))
-    print('4) 已知边界：act.*（拥抱/拉/拍/看）检测到但未并入 film.shot schema，动作细节不进入编码。')
+    print('4) act 已并入 film.shot（单槽），动作消歧结果进入编码；更细的动作层级仍需 schema 扩充。')
 
 
 if __name__ == '__main__':
